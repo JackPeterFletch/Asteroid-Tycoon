@@ -4,18 +4,21 @@ using System.Collections;
 public class RocketBehavior : MonoBehaviour {
 	
 	static float gravitational_constant = 10F;
+	static float updates = 0F;
+	public System.Collections.Generic.List<Vector3> positions = null;
 	
 	// Use this for initialization
 	void Start () {
 		var orbital_velocity = new Vector3(0,1000,0);
 		this.rigidbody.velocity = orbital_velocity;
+		positions = new System.Collections.Generic.List<Vector3>();
 		
 		LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
         //lineRenderer.useWorldSpace = true;
 		lineRenderer.material = new Material (Shader.Find("Particles/Additive"));
         lineRenderer.SetColors(Color.white, Color.white);
 		lineRenderer.SetWidth(100,100);
-		lineRenderer.SetVertexCount(10);
+		lineRenderer.SetVertexCount(50);
 	}
 	
 	// Update is called once per frame
@@ -37,9 +40,12 @@ public class RocketBehavior : MonoBehaviour {
 		
 		var thrust = new Vector3(0,0,-100 * this.rigidbody.mass);
 		
+		var fire = GameObject.Find("Fire");
+		fire.renderer.enabled = false;
 		// Keyboard input
 		if (Input.GetKey(KeyCode.UpArrow)){
 			this.transform.constantForce.relativeForce = thrust;
+			fire.renderer.enabled = true;
 		}
 		if (Input.GetKey(KeyCode.DownArrow)){
 			this.transform.constantForce.relativeForce = -thrust;
@@ -69,7 +75,17 @@ public class RocketBehavior : MonoBehaviour {
 		//}
 		
 		// Render Orbit prediction
-		this.UpdateTrajectory(this.transform.position,this.rigidbody.velocity, 1, 4000);
+		//this.UpdateTrajectory(this.transform.position,this.rigidbody.velocity, 1, 4000);
+		
+		updates++;
+		if(updates == 60){
+			updates = 0;
+			if(positions.Count == 50){
+				positions.RemoveAt(0);
+			}
+			positions.Add(this.transform.position);
+			BuildTrajectoryLine(positions);
+		}
 	}
 	
 	Vector3 GravityVector(Vector3 position){
@@ -93,7 +109,7 @@ public class RocketBehavior : MonoBehaviour {
 		var direction = velocity;
 		
 	    //while(traveledDistance < maxTravelDistance){
-		for(var i=0; i< 10; i++){
+		for(var i=0; i< 50; i++){
 	
 	        var newPos = currentPosition + direction + GravityVector(currentPosition) * timePerSegmentInSeconds * 60;
 			//newPos = newPos.normalized;
@@ -101,16 +117,9 @@ public class RocketBehavior : MonoBehaviour {
 	
 	        currentPosition = newPos;
 			Vector3 acceleration = GravityVector(currentPosition)/this.rigidbody.mass;
-			Debug.Log (direction);
 	        direction = direction + (acceleration * timePerSegmentInSeconds);
-	        //direction = direction.normalized;
-			Debug.Log (direction);
 	    }
-	
-	    
-	
 	    BuildTrajectoryLine(positions);
-	
 	}
 		
 	//Draw Line from set of positions
