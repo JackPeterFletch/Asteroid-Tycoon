@@ -2,11 +2,19 @@ using UnityEngine;
 using System.Collections;
 
 public class RocketBehavior : MonoBehaviour {
-
+	
+	LineRenderer lineRenderer;
+	
 	// Use this for initialization
 	void Start () {
 		var orbital_velocity = new Vector3(0,1500,0);
 		this.rigidbody.velocity = orbital_velocity;
+		
+		lineRenderer = gameObject.AddComponent<LineRenderer>();
+        //lineRenderer.useWorldSpace = true;
+		lineRenderer.material = new Material (Shader.Find("Particles/Additive"));
+        lineRenderer.SetColors(Color.white, Color.white);
+		lineRenderer.SetWidth(100,100);
 	}
 	
 	// Update is called once per frame
@@ -64,5 +72,63 @@ public class RocketBehavior : MonoBehaviour {
 		//if (Input.GetKey(KeyCode.E)){
 		//	this.transform.Rotate(0,-2,0);
 		//}
+		
+		// Render Orbit prediction
+		this.UpdateTrajectory(this.rigidbody.position,this.rigidbody.velocity, 1, 4000, gravitational_force, down);
+	}
+	
+	//
+	void UpdateTrajectory(Vector3 startPos, Vector3 velocity, float timePerSegmentInSeconds, float maxTravelDistance, float gravitational_force, Vector3 gravity_vector){	
+	    var positions = new System.Collections.Generic.List<Vector3>();
+	    var lastPosition = startPos;
+		var currentPosition = startPos;
+
+		positions.Add(startPos);
+	
+	    var traveledDistance = 0.0f;	
+		var direction = velocity;
+	    var speed = direction.magnitude;
+		
+	    //while(traveledDistance < maxTravelDistance){
+		for(var i=0; i< 10; ++i){
+	
+	        traveledDistance += speed * timePerSegmentInSeconds;	
+	        var hasHitSomething = TravelTrajectorySegment(startPos, direction, speed, timePerSegmentInSeconds, positions, gravitational_force, gravity_vector);	
+	        if (hasHitSomething){
+	        	break;
+			}
+	
+	        lastPosition = currentPosition;
+	        currentPosition = positions[positions.Count - 1];
+	        direction = currentPosition - lastPosition;
+	        direction.Normalize();
+	
+	    }
+	
+	    
+	
+	    BuildTrajectoryLine(positions);
+	
+	}
+		
+	//Draw Line from set of positions
+	void BuildTrajectoryLine(System.Collections.Generic.List<Vector3> positions){
+    	for (var i = 0; i < positions.Count; ++i){
+			lineRenderer.SetPosition(i, positions[i]);
+	    }
+	}
+	
+	//Calculate Trajectory Segment
+	bool TravelTrajectorySegment(Vector3 startPos, Vector3 direction, float speed, float timePerSegmentInSeconds, System.Collections.Generic.List<Vector3> positions, float gravitational_force, Vector3 gravity_vector){	
+		var newPos = startPos + direction * speed * timePerSegmentInSeconds + (gravity_vector * gravitational_force * timePerSegmentInSeconds); //EDIT THIS BIT
+		RaycastHit hitInfo;
+		var hasHitSomething = Physics.Linecast(startPos, newPos, out hitInfo);
+		if (hasHitSomething){
+	        newPos = hitInfo.transform.position;
+		}
+		positions.Add(newPos);
+
+		//return hasHitSomething;
+		return false;
 	}
 }
