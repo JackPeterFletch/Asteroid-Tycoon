@@ -103,8 +103,7 @@ public class RocketBehavior : MonoBehaviour {
 	        lastPosition = currentPosition;
 	        currentPosition = positions[positions.Count - 1];
 	        direction = currentPosition - lastPosition;
-	        direction.Normalize();
-	
+	        direction = direction.normalized;
 	    }
 	
 	    
@@ -122,7 +121,7 @@ public class RocketBehavior : MonoBehaviour {
 	
 	//Calculate Trajectory Segment
 	bool TravelTrajectorySegment(Vector3 startPos, Vector3 direction, float speed, float timePerSegmentInSeconds, System.Collections.Generic.List<Vector3> positions, float gravitational_force, Vector3 gravity_vector){	
-		var newPos = startPos + direction * speed * timePerSegmentInSeconds + (gravity_vector * gravitational_force * timePerSegmentInSeconds); //EDIT THIS BIT
+		var newPos = startPos + (direction * speed * timePerSegmentInSeconds) + (gravity_vector * gravitational_force * timePerSegmentInSeconds); //EDIT THIS BIT
 		RaycastHit hitInfo;
 		var hasHitSomething = Physics.Linecast(startPos, newPos, out hitInfo);
 		if (hasHitSomething){
