@@ -14,18 +14,10 @@ Shader "SlinDev/Planet"
    
 	SubShader
     {
-        Tags {
-
-                "LightMode" = "Always"              
-
-                "Queue" = "Transparent"
-
-                "RenderType" = "Transparent"
-
-        }
         Pass
         {
             Name "PlanetBase"
+            Tags {"LightMode" = "Always"}
             Cull Back
            
             CGPROGRAM
@@ -84,6 +76,7 @@ Shader "SlinDev/Planet"
         Pass
         {
             Name "AtmosphereBase"
+            Tags {"LightMode" = "Always"}
             Cull Front
             Blend SrcAlpha One
            

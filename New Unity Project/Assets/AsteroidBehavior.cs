@@ -21,8 +21,10 @@ public class AsteroidBehavior : MonoBehaviour {
 		
 		this.transform.position = z_locked;
 		
+		Vector3 origin = new Vector3(0,0,0);
+		
 		// GRAVITY
-		Vector3 diff = this.transform.parent.transform.position - this.transform.position;
+		Vector3 diff = origin - this.transform.position;
 		Vector3 down = diff.normalized;
 		float gravitational_force = (this.transform.parent.rigidbody.mass * this.rigidbody.mass * gravitational_constant) / diff.sqrMagnitude;
 		this.rigidbody.AddForce(down * gravitational_force);
