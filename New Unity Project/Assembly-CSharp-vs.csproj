@@ -46,6 +46,8 @@
   <ItemGroup>
      <Compile Include="Assets\AsteroidBehavior.cs" />
      <Compile Include="Assets\CameraControl.cs" />
+     <Compile Include="Assets\GuiScript.cs" />
+     <Compile Include="Assets\MenuText.cs" />
      <Compile Include="Assets\RocketBehavior.cs" />
      <None Include="Assets\Shaders\Earth.shader" />
   </ItemGroup>
