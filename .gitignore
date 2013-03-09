@@ -17,8 +17,8 @@
 #recreate a well developed tool seems greedy. Focus on your product not on making things 
 #more difficult for your users.
 
-Temp/*
-Library/*
+Temp/**/*
+Library/**/*
 
 
 !Library/*.asset
