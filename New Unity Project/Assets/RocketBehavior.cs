@@ -5,12 +5,14 @@ public class RocketBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		var orbital_velocity = new Vector3(0,200,0);
+		var orbital_velocity = new Vector3(0,1300,0);
 		this.rigidbody.velocity = orbital_velocity;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		float gravitational_constant = 9.81F;
+		
 		//Lock z axis
 		var x = this.transform.position.x;
 		var y = this.transform.position.y;
@@ -22,10 +24,14 @@ public class RocketBehavior : MonoBehaviour {
 		var zero_thrust = new Vector3(0,0,0);
 		this.transform.constantForce.relativeForce = zero_thrust;
 		
-		Vector3 gravity = this.transform.parent.transform.position - this.transform.position;
-		var thrust = new Vector3(0,0,-100);
+		// GRAVITY
+		Vector3 diff = this.transform.parent.transform.position - this.transform.position;
+		Vector3 down = diff.normalized;
+		float gravitational_force = (this.transform.parent.rigidbody.mass * this.rigidbody.mass * gravitational_constant) / diff.sqrMagnitude;
+		this.rigidbody.AddForce(down * gravitational_force);
+		////////////////
 		
-		this.transform.constantForce.force = gravity/3;
+		var thrust = new Vector3(0,0,-1000) * this.rigidbody.mass;
 		
 		// Keyboard input
 		if (Input.GetKey(KeyCode.UpArrow)){
