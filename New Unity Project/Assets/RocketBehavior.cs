@@ -7,7 +7,7 @@ public class RocketBehavior : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		var orbital_velocity = new Vector3(0,1500,0);
+		var orbital_velocity = new Vector3(0,1000,0);
 		this.rigidbody.velocity = orbital_velocity;
 		
 		lineRenderer = gameObject.AddComponent<LineRenderer>();
@@ -19,7 +19,7 @@ public class RocketBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float gravitational_constant = 32F;
+		float gravitational_constant = 10F;
 		var planet = GameObject.Find("Planet");
 		
 		//Lock z axis
@@ -42,7 +42,7 @@ public class RocketBehavior : MonoBehaviour {
 		//this.rigidbody.AddForce((origin - this.transform.position).normalized * gravitational_constant);
 		////////////////
 		
-		var thrust = new Vector3(0,0,-100) * this.rigidbody.mass;
+		var thrust = new Vector3(0,0,-100 * this.rigidbody.mass);
 		
 		// Keyboard input
 		if (Input.GetKey(KeyCode.UpArrow)){
@@ -52,10 +52,12 @@ public class RocketBehavior : MonoBehaviour {
 			this.transform.constantForce.relativeForce = -thrust;
 		}
 		if (Input.GetKey(KeyCode.W)){
-			this.transform.Rotate(-2,0,0);
+			//this.transform.Rotate(-2,0,0);
+			this.rigidbody.AddTorque(0,0,-50000 * this.rigidbody.mass);
 		}
 		if (Input.GetKey(KeyCode.S)){
-			this.transform.Rotate(2,0,0);
+			//this.transform.Rotate(2,0,0);
+			this.rigidbody.AddTorque(0,0,50000 * this.rigidbody.mass);
 		}
 		////////////////////////////////////////
 		
