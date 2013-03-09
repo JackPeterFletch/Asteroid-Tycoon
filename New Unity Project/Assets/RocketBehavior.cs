@@ -39,16 +39,21 @@ public class RocketBehavior : MonoBehaviour {
 		////////////////
 		
 		var thrust = new Vector3(0,0,-100 * this.rigidbody.mass);
+		var phantom = GameObject.Find("Phantom Shuttle");
 		
 		var fire = GameObject.Find("Fire");
 		fire.renderer.enabled = false;
 		// Keyboard input
 		if (Input.GetKey(KeyCode.UpArrow)){
 			this.transform.constantForce.relativeForce = thrust;
+			phantom.transform.position = this.transform.position;
+			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
 			fire.renderer.enabled = true;
 		}
 		if (Input.GetKey(KeyCode.DownArrow)){
 			this.transform.constantForce.relativeForce = -thrust;
+			phantom.transform.position = this.transform.position;
+			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
 		}
 		if (Input.GetKey(KeyCode.W)){
 			//this.transform.Rotate(-2,0,0);
@@ -77,14 +82,23 @@ public class RocketBehavior : MonoBehaviour {
 		// Render Orbit prediction
 		//this.UpdateTrajectory(this.transform.position,this.rigidbody.velocity, 1, 4000);
 		
+		
 		updates++;
-		if(updates == 60){
+		if(updates == 100){
 			updates = 0;
 			if(positions.Count == 50){
 				positions.RemoveAt(0);
 			}
 			positions.Add(this.transform.position);
-			BuildTrajectoryLine(positions);
+		}
+		
+		
+		
+		for (var i=0; i<10; i++){
+			
+			phantom.transform.constantForce.relativeForce = zero_thrust;
+		
+			phantom.rigidbody.AddForce(PhantomGravityVector(phantom.transform.position,phantom)*Time.deltaTime*60);
 		}
 	}
 	
@@ -95,6 +109,17 @@ public class RocketBehavior : MonoBehaviour {
 		Vector3 diff = origin - position;
 		Vector3 down = diff.normalized;
 		float gravitational_force = (planet.rigidbody.mass * this.rigidbody.mass * gravitational_constant) / diff.sqrMagnitude;
+		
+		return (down * gravitational_force);	
+	}
+	
+	Vector3 PhantomGravityVector(Vector3 position, GameObject phantom){
+		Vector3 origin = new Vector3(0,0,0);
+		var planet = GameObject.Find("Planet");
+		
+		Vector3 diff = origin - position;
+		Vector3 down = diff.normalized;
+		float gravitational_force = (planet.rigidbody.mass * phantom.rigidbody.mass * 100F) / diff.sqrMagnitude;
 		
 		return (down * gravitational_force);	
 	}
