@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class CameraControl : MonoBehaviour {
+	
+	static float manual_zoom = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -12,13 +14,16 @@ public class CameraControl : MonoBehaviour {
 	void Update () {
 		
 		Vector3 rocket_pos = GameObject.Find("SpaceShuttleOrbiter").transform.position;
-		GameObject.Find("Main Camera").transform.position = new Vector3(rocket_pos.x, rocket_pos.y, GameObject.Find("Main Camera").transform.position.z);
+		Vector3 planet_pos = GameObject.Find("Planet").transform.position;
+		var planet_radius = 4500/2;
+		var zoom = (Vector3.Distance(planet_pos, rocket_pos) - planet_radius) + 600 + manual_zoom;
+		GameObject.Find("Main Camera").transform.position = new Vector3(rocket_pos.x, rocket_pos.y, -zoom);
 		
 		if (Input.GetKey(KeyCode.Z)){
-			this.transform.Translate(0,0,10);
+			manual_zoom += 50;
 		}
 		if (Input.GetKey(KeyCode.X)){
-			this.transform.Translate(0,0,-10);
+			manual_zoom -= 50;
 		}
 	}
 }

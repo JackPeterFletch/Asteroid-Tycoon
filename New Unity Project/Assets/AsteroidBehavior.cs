@@ -5,19 +5,19 @@ public class AsteroidBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		var orbital_velocity = new Vector3(1000,0,0);
+		var orbital_velocity = new Vector3(150,0,0);
 		this.rigidbody.velocity = orbital_velocity;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		float gravitational_constant = 9.81F;
+		float gravitational_constant = 10F;
+		var planet = GameObject.Find("Planet");
 		
 		var x = this.transform.position.x;
 		var y = this.transform.position.y;
-		var planet_z = this.transform.parent.transform.position.z;
 		
-		var z_locked = new Vector3(x,y,planet_z);
+		var z_locked = new Vector3(x,y,0);
 		
 		this.transform.position = z_locked;
 		
@@ -26,7 +26,7 @@ public class AsteroidBehavior : MonoBehaviour {
 		// GRAVITY
 		Vector3 diff = origin - this.transform.position;
 		Vector3 down = diff.normalized;
-		float gravitational_force = (this.transform.parent.rigidbody.mass * this.rigidbody.mass * gravitational_constant) / diff.sqrMagnitude;
+		float gravitational_force = (planet.rigidbody.mass * this.rigidbody.mass * gravitational_constant) / diff.sqrMagnitude;
 		this.rigidbody.AddForce(down * gravitational_force);
 		////////////////
 		
