@@ -4,6 +4,7 @@ using System.Collections;
 public class RocketBehavior : MonoBehaviour {
 	
 	LineRenderer lineRenderer;
+	static float gravitational_constant = 10F;
 	
 	// Use this for initialization
 	void Start () {
@@ -19,8 +20,6 @@ public class RocketBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		float gravitational_constant = 10F;
-		var planet = GameObject.Find("Planet");
 		
 		//Lock z axis
 		//var x = this.transform.position.x;
@@ -32,13 +31,8 @@ public class RocketBehavior : MonoBehaviour {
 		var zero_thrust = new Vector3(0,0,0);
 		this.transform.constantForce.relativeForce = zero_thrust;
 		
-		Vector3 origin = new Vector3(0,0,0);
-		
 		// GRAVITY
-		Vector3 diff = origin - this.transform.position;
-		Vector3 down = diff.normalized;
-		float gravitational_force = (planet.rigidbody.mass * this.rigidbody.mass * gravitational_constant) / diff.sqrMagnitude;
-		this.rigidbody.AddForce(down * gravitational_force);
+		this.rigidbody.AddForce(GravityVector(this.transform.position)*Time.deltaTime*60);
 		//this.rigidbody.AddForce((origin - this.transform.position).normalized * gravitational_constant);
 		////////////////
 		
@@ -76,11 +70,22 @@ public class RocketBehavior : MonoBehaviour {
 		//}
 		
 		// Render Orbit prediction
-		this.UpdateTrajectory(this.rigidbody.position,this.rigidbody.velocity, 1, 4000, gravitational_force, down);
+		this.UpdateTrajectory(this.rigidbody.position,this.rigidbody.velocity, 1, 4000);
+	}
+	
+	Vector3 GravityVector(Vector3 position){
+		Vector3 origin = new Vector3(0,0,0);
+		var planet = GameObject.Find("Planet");
+		
+		Vector3 diff = origin - position;
+		Vector3 down = diff.normalized;
+		float gravitational_force = (planet.rigidbody.mass * this.rigidbody.mass * gravitational_constant) / diff.sqrMagnitude;
+		
+		return (down * gravitational_force);	
 	}
 	
 	//
-	void UpdateTrajectory(Vector3 startPos, Vector3 velocity, float timePerSegmentInSeconds, float maxTravelDistance, float gravitational_force, Vector3 gravity_vector){	
+	void UpdateTrajectory(Vector3 startPos, Vector3 velocity, float timePerSegmentInSeconds, float maxTravelDistance){	
 	    var positions = new System.Collections.Generic.List<Vector3>();
 	    var lastPosition = startPos;
 		var currentPosition = startPos;
@@ -95,10 +100,8 @@ public class RocketBehavior : MonoBehaviour {
 		for(var i=0; i< 10; ++i){
 	
 	        traveledDistance += speed * timePerSegmentInSeconds;	
-	        var hasHitSomething = TravelTrajectorySegment(startPos, direction, speed, timePerSegmentInSeconds, positions, gravitational_force, gravity_vector);	
-	        if (hasHitSomething){
-	        	break;
-			}
+	        var newPos = currentPosition + velocity + GravityVector(currentPosition) * timePerSegmentInSeconds * 60; //EDIT THIS BIT
+			positions.Add(newPos);
 	
 	        lastPosition = currentPosition;
 	        currentPosition = positions[positions.Count - 1];
@@ -117,19 +120,5 @@ public class RocketBehavior : MonoBehaviour {
     	for (var i = 0; i < positions.Count; ++i){
 			lineRenderer.SetPosition(i, positions[i]);
 	    }
-	}
-	
-	//Calculate Trajectory Segment
-	bool TravelTrajectorySegment(Vector3 startPos, Vector3 direction, float speed, float timePerSegmentInSeconds, System.Collections.Generic.List<Vector3> positions, float gravitational_force, Vector3 gravity_vector){	
-		var newPos = startPos + (direction * speed * timePerSegmentInSeconds) + (gravity_vector * gravitational_force * timePerSegmentInSeconds); //EDIT THIS BIT
-		RaycastHit hitInfo;
-		var hasHitSomething = Physics.Linecast(startPos, newPos, out hitInfo);
-		if (hasHitSomething){
-	        newPos = hitInfo.transform.position;
-		}
-		positions.Add(newPos);
-
-		//return hasHitSomething;
-		return false;
 	}
 }
