@@ -11,7 +11,7 @@ public class MenuZoomScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		if (gameObject.transform.position.z > 6){
+		if (gameObject.transform.position.z > 80){
 		
 			gameObject.transform.Translate(0,0,-(50*Time.deltaTime));
 			
