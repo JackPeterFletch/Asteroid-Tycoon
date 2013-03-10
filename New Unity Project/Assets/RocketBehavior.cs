@@ -63,9 +63,9 @@ public class RocketBehavior : MonoBehaviour {
 			audio.enabled = true;
 			if (!audio.isPlaying){
 				audio.Play();
-			} else {
-				audio.Stop();
-			}
+			} 
+		} else {
+			audio.Stop();
 		}
      	if (Input.GetKey(KeyCode.DownArrow)){
 	        this.transform.constantForce.relativeForce = -thrust;
