@@ -7,6 +7,7 @@ public class RocketBehavior : MonoBehaviour {
 	static float updates = 0F;
 	public System.Collections.Generic.List<Vector3> positions = null;
 	
+	
 	// Use this for initialization
 	void Start () {
 		var orbital_velocity = new Vector3(0,1000,0);
@@ -59,12 +60,18 @@ public class RocketBehavior : MonoBehaviour {
       		phantom.transform.position = this.transform.position;
       		phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
        		fire.renderer.enabled = true;
-     }
-     if (Input.GetKey(KeyCode.DownArrow)){
+			audio.enabled = true;
+			if (!audio.isPlaying){
+				audio.Play();
+			} else {
+				audio.Stop();
+			}
+		}
+     	if (Input.GetKey(KeyCode.DownArrow)){
 	        this.transform.constantForce.relativeForce = -thrust;
     	    phantom.transform.position = this.transform.position;
 			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
-     }
+     	}
 		if (Input.GetKey(KeyCode.W)){
 			//this.transform.Rotate(-2,0,0);
 			this.rigidbody.AddTorque(0,0,-50000 * this.rigidbody.mass);
