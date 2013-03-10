@@ -20,10 +20,10 @@ public class CameraControl : MonoBehaviour {
 		
 		var current_manual_zoom = manual_zoom;
 		if (Input.GetKey(KeyCode.Z)){
-			manual_zoom += 50;
+			manual_zoom += 100;
 		}
 		if (Input.GetKey(KeyCode.X)){
-			manual_zoom -= 50;
+			manual_zoom -= 100;
 		}
 		if((zoom + manual_zoom) < 600){
 			manual_zoom = current_manual_zoom;

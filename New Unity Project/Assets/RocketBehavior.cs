@@ -82,16 +82,18 @@ public class RocketBehavior : MonoBehaviour {
 			PhantomBehaviour.wipe = true;
      	}
 		if (Input.GetKey(KeyCode.W)){
-			//this.transform.Rotate(-2,0,0);
-			this.rigidbody.AddTorque(0,0,-RCS_thrust * this.rigidbody.mass);
-			frontTop.renderer.enabled = true;
-			rearBottom.renderer.enabled = true;
+			if(!gyro){
+				this.rigidbody.AddTorque(0,0,-RCS_thrust * this.rigidbody.mass);
+				frontTop.renderer.enabled = true;
+				rearBottom.renderer.enabled = true;
+			}
 		}
 		if (Input.GetKey(KeyCode.S)){
-			//this.transform.Rotate(2,0,0);
-			this.rigidbody.AddTorque(0,0,RCS_thrust * this.rigidbody.mass);
-			frontBottom.renderer.enabled = true;
-			rearTop.renderer.enabled = true;	
+			if(!gyro){
+				this.rigidbody.AddTorque(0,0,RCS_thrust * this.rigidbody.mass);
+				frontBottom.renderer.enabled = true;
+				rearTop.renderer.enabled = true;
+			}
 		}
 	    if (Input.GetKeyUp(KeyCode.G)){
 			if (gyro == true){
@@ -148,7 +150,7 @@ public class RocketBehavior : MonoBehaviour {
         //Instantiate(explosionPrefab, pos, rot) as Transform;
 		if (collision.gameObject == GameObject.Find("Planet")){
         	Destroy(gameObject);
-			Application.Quit();
+			FailureMenu.userHasFailed = true;
 		}
 	}
 	

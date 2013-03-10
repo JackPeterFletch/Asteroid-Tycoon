@@ -46,6 +46,7 @@
   <ItemGroup>
      <Compile Include="Assets\AsteroidBehavior.cs" />
      <Compile Include="Assets\CameraControl.cs" />
+     <Compile Include="Assets\FailureMenu.cs" />
      <Compile Include="Assets\Grabber.cs" />
      <Compile Include="Assets\Gyro.cs" />
      <Compile Include="Assets\MenuScript.cs" />
