@@ -95,7 +95,7 @@ public class RocketBehavior : MonoBehaviour {
 	    if (Input.GetKey (KeyCode.G)){
 			if (gyro == true){
 				gyro = false;
-			}else{
+			}else if (SphereTriggerScript.roidAttached == false){
 				gyro = true;
 			}
 		}

@@ -6,24 +6,30 @@ public class asteroidGen : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		for(int i = 0;i<100;i++){
+		for(int i = 0;i<300;i++){
 			var innerRad = 15000;
-			var outerRad = 25000;
+			var outerRad = 28000;
 			var c = Random.insideUnitCircle * outerRad; // Initial Random x,y
 			
 			//If both x and y are within innerRad, loop until not
-			while((c.x > -innerRad && c.x < innerRad)&&(c.y > -innerRad && c.y < innerRad)){
-				c = Random.insideUnitCircle * outerRad;
+			if((c.x > -innerRad && c.x < innerRad)&&(c.y > -innerRad && c.y < innerRad)){
+				while((c.x > -innerRad && c.x < innerRad) && (c.y > -innerRad && c.y < innerRad)){
+					c = Random.insideUnitCircle * outerRad;
+				}
 			}
 			
 			//If y is within innerRad, but x is not, loop until y is out
-			while((c.y > -innerRad && c.y < innerRad) && (c.x < -innerRad && c.x > innerRad)){
-				c.y = (Random.insideUnitCircle * outerRad).y;
+			if((c.y > -innerRad && c.y < innerRad) && (c.x < -innerRad && c.x > innerRad)){
+				while(c.y > -innerRad && c.y < innerRad){
+					c.y = (Random.insideUnitCircle * outerRad).y;
+				}
 			}
 			
 			//If x is within innerRad, but y is not, loop until x is out
-			while((c.x > -innerRad && c.x < innerRad) && (c.y < -innerRad && c.y > innerRad)){
-				c.x = (Random.insideUnitCircle * outerRad).x;
+			if((c.x > -innerRad && c.x < innerRad) && (c.y < -innerRad && c.y > innerRad)){
+				while(c.x > -innerRad && c.x < innerRad){
+					c.x = (Random.insideUnitCircle * outerRad).x;
+				}
 			}
 			
 			//Set position, instantiate prefab asteroid
