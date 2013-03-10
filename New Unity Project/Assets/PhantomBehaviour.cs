@@ -4,7 +4,9 @@ using System.Collections;
 public class PhantomBehaviour : MonoBehaviour {
 	
 	static float updates = 0F;
+	public static bool wipe = false;
 	public static System.Collections.Generic.List<Vector3> positions = null;
+	public static LineRenderer lineRenderer;
 	
 	// Use this for initialization
 	void Start () {
@@ -13,8 +15,7 @@ public class PhantomBehaviour : MonoBehaviour {
 		this.transform.position = GameObject.Find("SpaceShuttleOrbiter").transform.position;
 		positions = new System.Collections.Generic.List<Vector3>();
 		
-		LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
-        //lineRenderer.useWorldSpace = true;
+		lineRenderer = gameObject.AddComponent<LineRenderer>();
 		lineRenderer.material = new Material (Shader.Find("Particles/Additive"));
         lineRenderer.SetColors(Color.blue, Color.blue);
 		lineRenderer.SetWidth(10,10);
@@ -26,8 +27,15 @@ public class PhantomBehaviour : MonoBehaviour {
 		
 		var height = (this.transform.position - GameObject.Find("SpaceShuttleOrbiter").transform.position).magnitude;
 		
+		if(wipe){
+			positions.Clear();
+			lineRenderer.SetVertexCount(0);
+			lineRenderer.SetVertexCount(300);
+			wipe = false;
+		}
+		
 		updates++;
-		if(updates == 2){
+		if(updates >= 2){
 			updates = 0;
 			if(positions.Count >= Mathf.Sqrt(height)*2){
 				positions.RemoveAt(0);

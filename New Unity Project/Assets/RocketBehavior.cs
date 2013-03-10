@@ -71,7 +71,7 @@ public class RocketBehavior : MonoBehaviour {
 		if (Input.GetKeyUp(KeyCode.UpArrow)){
     	    phantom.transform.position = this.transform.position;
 			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
-			PhantomBehaviour.positions.Clear();
+			PhantomBehaviour.wipe = true;
      	}
      	if (Input.GetKey(KeyCode.DownArrow)){
 	        this.transform.constantForce.relativeForce = -thrust;
@@ -79,7 +79,7 @@ public class RocketBehavior : MonoBehaviour {
 		if (Input.GetKeyUp(KeyCode.DownArrow)){
     	    phantom.transform.position = this.transform.position;
 			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
-			PhantomBehaviour.positions.Clear();
+			PhantomBehaviour.wipe = true;
      	}
 		if (Input.GetKey(KeyCode.W)){
 			//this.transform.Rotate(-2,0,0);
