@@ -10,9 +10,9 @@ public class AsteroidBehavior : MonoBehaviour {
 		var x = this.rigidbody.position.x;
 		var y = this.rigidbody.position.y;
 		var distance = Mathf.Sqrt((x*x)+(y*y));
-		var orbital_velocity = (Vector3.Cross(this.rigidbody.position,Vector3.forward)/(distance/850));//The more the distance is divided, the smaller the velocity.
+		var orbital_velocity = (Vector3.Cross(this.rigidbody.position,Vector3.forward)/(distance/780));//The more the distance is divided, the smaller the velocity.
 		this.rigidbody.velocity = orbital_velocity;
-		var rand = Random.Range (-40,80);
+		var rand = Random.Range (-40,120);
 		this.transform.localScale += new Vector3(rand,rand,rand);
 		
 	}
