@@ -49,8 +49,11 @@ public class AsteroidBehavior : MonoBehaviour {
 	
 	void OnCollisionEnter(Collision collision) {
 		
+		Debug.Log("HELLOYOLOLOL");
+		
         //Instantiate(explosionPrefab, pos, rot) as Transform;
 		if (collision.gameObject == GameObject.Find("Planet")){
+			GameObject.Find("Main Camera").audio.Play();
         	Destroy(gameObject);
 		}
 	}
