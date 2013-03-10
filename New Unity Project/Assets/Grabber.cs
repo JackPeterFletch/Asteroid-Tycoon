@@ -9,6 +9,10 @@ public class Grabber: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {				
-		this.guiText.text = "Grabber Active: " + SphereTriggerScript.toolDetaching;
+		if (SphereTriggerScript.toolDetaching == true){
+			this.guiText.text = "Grabber: In Use";
+		} else {
+			this.guiText.text = "Grabber: Available For Use";
+		}
 	}
 }
