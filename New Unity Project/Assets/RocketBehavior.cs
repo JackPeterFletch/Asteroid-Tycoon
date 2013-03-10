@@ -42,26 +42,37 @@ public class RocketBehavior : MonoBehaviour {
 		var phantom = GameObject.Find("Phantom Shuttle");
 		
 		var fire = GameObject.Find("Fire");
+		var frontBottom = GameObject.Find("RCSFrontBottom");
+		frontBottom.renderer.enabled = false;
+		var frontTop = GameObject.Find("RCSFrontTop");
+		frontTop.renderer.enabled = false;
+		var rearBottom = GameObject.Find("RCSRearBottom");
+		rearBottom.renderer.enabled = false;
+		var rearTop = GameObject.Find("RCSRearTop");
+		rearTop.renderer.enabled = false;
+		
+		
 		fire.renderer.enabled = false;
 		// Keyboard input
 		if (Input.GetKey(KeyCode.UpArrow)){
 			this.transform.constantForce.relativeForce = thrust;
-			phantom.transform.position = this.transform.position;
-			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
 			fire.renderer.enabled = true;
 		}
 		if (Input.GetKey(KeyCode.DownArrow)){
 			this.transform.constantForce.relativeForce = -thrust;
-			phantom.transform.position = this.transform.position;
-			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
 		}
 		if (Input.GetKey(KeyCode.W)){
 			//this.transform.Rotate(-2,0,0);
 			this.rigidbody.AddTorque(0,0,-50000 * this.rigidbody.mass);
+			frontTop.renderer.enabled = true;
+			rearBottom.renderer.enabled = true;
 		}
 		if (Input.GetKey(KeyCode.S)){
 			//this.transform.Rotate(2,0,0);
 			this.rigidbody.AddTorque(0,0,50000 * this.rigidbody.mass);
+			frontBottom.renderer.enabled = true;
+			rearTop.renderer.enabled = true;
+			
 		}
 		////////////////////////////////////////
 		
