@@ -6,7 +6,7 @@ public class asteroidGen : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		for(int i = 0;i<500;i++){
+		for(int i = 0;i<100;i++){
 			var innerRad = 15000;
 			var outerRad = 25000;
 			var c = Random.insideUnitCircle * outerRad; // Initial Random x,y

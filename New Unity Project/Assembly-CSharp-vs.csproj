@@ -46,8 +46,8 @@
   <ItemGroup>
      <Compile Include="Assets\AsteroidBehavior.cs" />
      <Compile Include="Assets\CameraControl.cs" />
+     <Compile Include="Assets\Grabber.cs" />
      <Compile Include="Assets\Gyro.cs" />
-     <Compile Include="Assets\MoneyCounter.cs" />
      <Compile Include="Assets\PhantomBehaviour.cs" />
      <Compile Include="Assets\RocketBehavior.cs" />
      <Compile Include="Assets\SpeedWidget.cs" />
