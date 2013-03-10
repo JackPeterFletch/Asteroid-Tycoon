@@ -46,10 +46,12 @@
   <ItemGroup>
      <Compile Include="Assets\AsteroidBehavior.cs" />
      <Compile Include="Assets\CameraControl.cs" />
+     <Compile Include="Assets\FailureMenu.cs" />
      <Compile Include="Assets\Grabber.cs" />
      <Compile Include="Assets\Gyro.cs" />
      <Compile Include="Assets\MenuScript.cs" />
      <Compile Include="Assets\MenuZoomScript.cs" />
+     <Compile Include="Assets\MoneyCounterScript.cs" />
      <Compile Include="Assets\PhantomBehaviour.cs" />
      <Compile Include="Assets\RocketBehavior.cs" />
      <Compile Include="Assets\SpeedWidget.cs" />
