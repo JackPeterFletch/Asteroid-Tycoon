@@ -7,18 +7,15 @@ public class AsteroidBehavior : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		var orbital_velocity = new Vector3(1000,0,0);
+		var orbital_velocity = (Vector3.Cross(this.rigidbody.position,Vector3.forward)/8);
 		this.rigidbody.velocity = orbital_velocity;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
 		var x = this.transform.position.x;
 		var y = this.transform.position.y;
-		
 		var z_locked = new Vector3(x,y,0);
-		
 		this.transform.position = z_locked;
 			
 		// GRAVITY
