@@ -4,6 +4,7 @@ using System.Collections;
 public class AsteroidBehavior : MonoBehaviour {
 
 	static float gravitational_constant = 10F;
+	float rand = 0;
 	
 	// Use this for initialization
 	void Start () {
@@ -12,7 +13,7 @@ public class AsteroidBehavior : MonoBehaviour {
 		var distance = Mathf.Sqrt((x*x)+(y*y));
 		var orbital_velocity = (Vector3.Cross(this.rigidbody.position,Vector3.forward)/(distance/780));//The more the distance is divided, the smaller the velocity.
 		this.rigidbody.velocity = orbital_velocity;
-		var rand = Random.Range (-40,120);
+		rand  = Random.Range (-40,120);
 		this.transform.localScale += new Vector3(rand,rand,rand);
 	}
 	
@@ -54,6 +55,7 @@ public class AsteroidBehavior : MonoBehaviour {
         //Instantiate(explosionPrefab, pos, rot) as Transform;
 		if (collision.gameObject == GameObject.Find("Planet")){
 			GameObject.Find("Main Camera").audio.Play();
+			MoneyCounterScript.money = MoneyCounterScript.money + (int)transform.localScale.x /150 *1000;
         	Destroy(gameObject);
 		}
 	}
