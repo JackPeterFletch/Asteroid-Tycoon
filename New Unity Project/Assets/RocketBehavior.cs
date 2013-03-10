@@ -6,13 +6,19 @@ public class RocketBehavior : MonoBehaviour {
 	static float gravitational_constant = 10F;
 	static float updates = 0F;
 	public System.Collections.Generic.List<Vector3> positions = null;
+	public GameObject phantom;
 	public bool gyro = false;
+	public bool first_tick = true;
 	
 	// Use this for initialization
 	void Start () {
 		var orbital_velocity = new Vector3(0,1200,0);
 		this.rigidbody.velocity = orbital_velocity;
 		positions = new System.Collections.Generic.List<Vector3>();
+		phantom = GameObject.Find("Phantom Shuttle");
+		
+		phantom.transform.position = this.transform.position;
+      	phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
 		
 		LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
         //lineRenderer.useWorldSpace = true;
@@ -25,13 +31,6 @@ public class RocketBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		//Lock z axis
-		//var x = this.transform.position.x;
-		//var y = this.transform.position.y;
-		//var z_locked = new Vector3(x,y,0);
-		//this.transform.position = z_locked;
-		//////////////////////////////////////
-		
 		var zero_thrust = new Vector3(0,0,0);
 		this.transform.constantForce.relativeForce = zero_thrust;
 		
@@ -40,7 +39,6 @@ public class RocketBehavior : MonoBehaviour {
 		////////////////
 		
 		var thrust = new Vector3(0,0,-100 * this.rigidbody.mass);
-		var phantom = GameObject.Find("Phantom Shuttle");
 		
 		var fire = GameObject.Find("Fire");
 		var frontBottom = GameObject.Find("RCSFrontBottom");

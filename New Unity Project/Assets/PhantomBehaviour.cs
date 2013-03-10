@@ -9,8 +9,9 @@ public class PhantomBehaviour : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		var orbital_velocity = new Vector3(0,10000,0);
+		var orbital_velocity = new Vector3(0,12000,0);
 		this.rigidbody.velocity = orbital_velocity;
+		this.transform.position = GameObject.Find("SpaceShuttleOrbiter").transform.position;
 		positions = new System.Collections.Generic.List<Vector3>();
 		
 		LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
@@ -25,7 +26,7 @@ public class PhantomBehaviour : MonoBehaviour {
 	void Update(){
 		
 		updates++;
-		if(updates == 6){
+		if(updates == 2){
 			updates = 0;
 			if(positions.Count == 50){
 				positions.RemoveAt(0);
