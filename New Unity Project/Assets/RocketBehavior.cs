@@ -55,12 +55,16 @@ public class RocketBehavior : MonoBehaviour {
 		fire.renderer.enabled = false;
 		// Keyboard input
 		if (Input.GetKey(KeyCode.UpArrow)){
-			this.transform.constantForce.relativeForce = thrust;
-			fire.renderer.enabled = true;
-		}
-		if (Input.GetKey(KeyCode.DownArrow)){
-			this.transform.constantForce.relativeForce = -thrust;
-		}
+       		this.transform.constantForce.relativeForce = thrust;
+      		phantom.transform.position = this.transform.position;
+      		phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
+       		fire.renderer.enabled = true;
+     }
+     if (Input.GetKey(KeyCode.DownArrow)){
+	        this.transform.constantForce.relativeForce = -thrust;
+    	    phantom.transform.position = this.transform.position;
+			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
+     }
 		if (Input.GetKey(KeyCode.W)){
 			//this.transform.Rotate(-2,0,0);
 			this.rigidbody.AddTorque(0,0,-50000 * this.rigidbody.mass);
