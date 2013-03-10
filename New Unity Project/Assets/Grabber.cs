@@ -9,10 +9,10 @@ public class Grabber: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {				
-		if (SphereTriggerScript.roidAttached == true){
-			this.guiText.text = "Grabber: In Use";
+		if (SphereTriggerScript.toolDetaching == true){
+			this.guiText.text = "Grabber: Off";
 		} else {
-			this.guiText.text = "Grabber: Available For Use";
+			this.guiText.text = "Grabber: On";
 		}
 	}
 }

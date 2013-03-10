@@ -88,7 +88,7 @@ public class RocketBehavior : MonoBehaviour {
 			frontBottom.renderer.enabled = true;
 			rearTop.renderer.enabled = true;	
 		}
-	    if (Input.GetKey (KeyCode.G)){
+	    if (Input.GetKeyUp(KeyCode.G)){
 			if (gyro == true){
 				gyro = false;
 			}else if (SphereTriggerScript.roidAttached == false){
