@@ -150,7 +150,7 @@ public class RocketBehavior : MonoBehaviour {
         //Instantiate(explosionPrefab, pos, rot) as Transform;
 		if (collision.gameObject == GameObject.Find("Planet")){
         	Destroy(gameObject);
-			Application.Quit();
+			FailureMenu.userHasFailed = true;
 		}
 	}
 	
