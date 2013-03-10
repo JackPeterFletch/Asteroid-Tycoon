@@ -27,6 +27,7 @@ public class RocketBehavior : MonoBehaviour {
         lineRenderer.SetColors(Color.white, Color.white);
 		lineRenderer.SetWidth(100,100);
 		lineRenderer.SetVertexCount(50);
+
 	}
 	
 	// Update is called once per frame
