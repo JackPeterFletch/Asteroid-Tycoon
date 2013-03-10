@@ -25,7 +25,7 @@ public class PhantomBehaviour : MonoBehaviour {
 	void Update(){
 		
 		updates++;
-		if(updates == 6){
+		if(updates == 2){
 			updates = 0;
 			if(positions.Count == 50){
 				positions.RemoveAt(0);
