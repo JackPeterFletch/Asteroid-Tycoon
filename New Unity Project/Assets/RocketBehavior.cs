@@ -17,7 +17,7 @@ public class RocketBehavior : MonoBehaviour {
 		this.rigidbody.velocity = orbital_velocity;
 		positions = new System.Collections.Generic.List<Vector3>();
 		phantom = GameObject.Find("Phantom Shuttle");
-		gyro = true;
+		gyro = false;
 		phantom.transform.position = this.transform.position;
       	phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
 		
