@@ -4,7 +4,7 @@ using System.Collections;
 public class PhantomBehaviour : MonoBehaviour {
 	
 	static float updates = 0F;
-	public System.Collections.Generic.List<Vector3> positions = null;
+	public static System.Collections.Generic.List<Vector3> positions = null;
 	
 	// Use this for initialization
 	void Start () {
@@ -35,6 +35,7 @@ public class PhantomBehaviour : MonoBehaviour {
 			if(positions.Count == 300){
 				positions.RemoveAt(0);
 			}
+			Debug.Log (positions.Count);
 			positions.Add(this.transform.position);
 			BuildTrajectoryLine(positions);
 		}
