@@ -61,8 +61,6 @@ public class RocketBehavior : MonoBehaviour {
 		// Keyboard input
 		if (Input.GetKey(KeyCode.UpArrow)){
        		this.transform.constantForce.relativeForce = thrust;
-      		phantom.transform.position = this.transform.position;
-      		phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
        		fire.renderer.enabled = true;
 			audio.enabled = true;
 			if (!audio.isPlaying){
@@ -71,8 +69,14 @@ public class RocketBehavior : MonoBehaviour {
 		} else {
 			audio.Stop();
 		}
+		if (Input.GetKeyUp(KeyCode.UpArrow)){
+    	    phantom.transform.position = this.transform.position;
+			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
+     	}
      	if (Input.GetKey(KeyCode.DownArrow)){
 	        this.transform.constantForce.relativeForce = -thrust;
+     	}
+		if (Input.GetKeyUp(KeyCode.DownArrow)){
     	    phantom.transform.position = this.transform.position;
 			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
      	}
@@ -88,10 +92,10 @@ public class RocketBehavior : MonoBehaviour {
 			frontBottom.renderer.enabled = true;
 			rearTop.renderer.enabled = true;	
 		}
-	    if (Input.GetKey (KeyCode.G)){
+	    if (Input.GetKeyUp(KeyCode.G)){
 			if (gyro == true){
 				gyro = false;
-			}else{
+			}else if (SphereTriggerScript.roidAttached == false){
 				gyro = true;
 			}
 		}
