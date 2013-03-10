@@ -56,6 +56,7 @@ public class AsteroidBehavior : MonoBehaviour {
 		if (collision.gameObject == GameObject.Find("Planet")){
 			GameObject.Find("Main Camera").audio.Play();
 			MoneyCounterScript.money = MoneyCounterScript.money + (int)((transform.localScale.x *1000)/150);
+			MoneyCounterScript.deorbit_count++;
         	Destroy(gameObject);
 		}
 	}
