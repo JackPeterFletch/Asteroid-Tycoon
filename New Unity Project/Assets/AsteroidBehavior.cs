@@ -7,7 +7,7 @@ public class AsteroidBehavior : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		var orbital_velocity = (Vector3.Cross(this.rigidbody.position,Vector3.forward)/9);
+		var orbital_velocity = (Vector3.Cross(this.rigidbody.position,Vector3.forward)/15);
 		this.rigidbody.velocity = orbital_velocity;
 	}
 	
