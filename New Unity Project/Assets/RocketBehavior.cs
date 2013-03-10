@@ -112,7 +112,7 @@ public class RocketBehavior : MonoBehaviour {
 		//this.UpdateTrajectory(this.transform.position,this.rigidbody.velocity, 1, 4000);
 		
 		if (gyro == true){
-			
+			transform.RotateAround (Vector3.zero, Vector3.back, 20 * Time.deltaTime);
 		}
 		
 		updates++;
@@ -132,6 +132,14 @@ public class RocketBehavior : MonoBehaviour {
 		
 			phantom.rigidbody.AddForce(PhantomGravityVector(phantom.transform.position,phantom)*Time.deltaTime*60);
 		}
+	}
+	
+	void OnCollisionEnter(Collision collision) {
+        //Instantiate(explosionPrefab, pos, rot) as Transform;
+		if (collision.gameObject == GameObject.Find("Planet")){
+        	Destroy(gameObject);
+		}
+		Application.Quit();
 	}
 	
 	Vector3 GravityVector(Vector3 position){
@@ -178,7 +186,7 @@ public class RocketBehavior : MonoBehaviour {
 	    }
 	    BuildTrajectoryLine(positions);
 	}
-		
+			
 	//Draw Line from set of positions
 	void BuildTrajectoryLine(System.Collections.Generic.List<Vector3> positions){
 		LineRenderer lineRenderer = GetComponent<LineRenderer>();
@@ -186,4 +194,5 @@ public class RocketBehavior : MonoBehaviour {
 			lineRenderer.SetPosition(i, positions[i]);
 	    }
 	}
+	
 }

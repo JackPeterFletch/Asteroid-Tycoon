@@ -14,6 +14,5 @@ public class SpeedWidget : MonoBehaviour {
 		var spaceShuttle = GameObject.Find("SpaceShuttleOrbiter");
 		
 		this.guiText.text = "Speed (Somethings/S): " + spaceShuttle.rigidbody.velocity.magnitude.ToString();
-	
 	}
 }
