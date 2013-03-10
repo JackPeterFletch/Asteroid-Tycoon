@@ -50,6 +50,7 @@
      <Compile Include="Assets\Gyro.cs" />
      <Compile Include="Assets\MenuScript.cs" />
      <Compile Include="Assets\MenuZoomScript.cs" />
+     <Compile Include="Assets\MoneyCounterScript.cs" />
      <Compile Include="Assets\PhantomBehaviour.cs" />
      <Compile Include="Assets\RocketBehavior.cs" />
      <Compile Include="Assets\SpeedWidget.cs" />
