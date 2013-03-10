@@ -8,6 +8,7 @@ public class SphereTriggerScript : MonoBehaviour {
 	public static bool toolDetaching;
 	
 	public AudioClip thunkNoise;
+	public AudioClip releaseNoise;
 	
 	// Use this for initialization
 	void Start () {
@@ -25,6 +26,7 @@ public class SphereTriggerScript : MonoBehaviour {
 			
 			var shuttleVar = GameObject.Find("SpaceShuttleOrbiter");
 			Destroy(shuttleVar.GetComponent<FixedJoint>());
+			GameObject.Find ("Main Camera").audio.PlayOneShot(releaseNoise);
 			
 						
 		} else if(Input.GetKeyDown(KeyCode.Space)){
