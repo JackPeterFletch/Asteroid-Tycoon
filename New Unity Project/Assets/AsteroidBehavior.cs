@@ -28,6 +28,7 @@ public class AsteroidBehavior : MonoBehaviour {
 		
 		var zero_thrust = new Vector3(0,0,0);
 		this.transform.constantForce.relativeForce = zero_thrust;
+			
 	}
 	
 	Vector3 GravityVector(Vector3 position){
@@ -40,4 +41,5 @@ public class AsteroidBehavior : MonoBehaviour {
 		
 		return (down * gravitational_force);	
 	}
+		
 }
