@@ -12,6 +12,6 @@ public class MoneyCounter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {				
-		this.guiText.text = "Money $ " + amountOfMoney;
+		this.guiText.text = "Money $ " + SphereTriggerScript.toolDetaching;
 	}
 }
