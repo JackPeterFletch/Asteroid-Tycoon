@@ -19,7 +19,7 @@ public class PhantomBehaviour : MonoBehaviour {
 		lineRenderer.material = new Material (Shader.Find("Particles/Additive"));
         lineRenderer.SetColors(Color.blue, Color.blue);
 		lineRenderer.SetWidth(10,10);
-		lineRenderer.SetVertexCount(50);
+		lineRenderer.SetVertexCount(300);
 	}
 	
 	// Update is called once per frame
@@ -28,7 +28,7 @@ public class PhantomBehaviour : MonoBehaviour {
 		updates++;
 		if(updates == 2){
 			updates = 0;
-			if(positions.Count == 50){
+			if(positions.Count == 300){
 				positions.RemoveAt(0);
 			}
 			positions.Add(this.transform.position);
