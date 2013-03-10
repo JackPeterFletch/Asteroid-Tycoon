@@ -3,7 +3,6 @@ using System.Collections;
 
 public class PhantomBehaviour : MonoBehaviour {
 	
-	static float gravitational_constant = 10F;
 	static float updates = 0F;
 	public System.Collections.Generic.List<Vector3> positions = null;
 	
@@ -25,49 +24,20 @@ public class PhantomBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update(){
 		
+		var height = (this.transform.position - GameObject.Find("SpaceShuttleOrbiter").transform.position).magnitude;
+		
 		updates++;
 		if(updates == 2){
 			updates = 0;
+			if(positions.Count >= Mathf.Sqrt(height)*2){
+				positions.RemoveAt(0);
+			}
 			if(positions.Count == 300){
 				positions.RemoveAt(0);
 			}
 			positions.Add(this.transform.position);
 			BuildTrajectoryLine(positions);
 		}
-	}
-	
-	Vector3 GravityVector(Vector3 position){
-		Vector3 origin = new Vector3(0,0,0);
-		var planet = GameObject.Find("Planet");
-		
-		Vector3 diff = origin - position;
-		Vector3 down = diff.normalized;
-		float gravitational_force = (planet.rigidbody.mass * this.rigidbody.mass * gravitational_constant) / diff.sqrMagnitude;
-		
-		return (down * gravitational_force);	
-	}
-	
-	//
-	void UpdateTrajectory(Vector3 startPos, Vector3 velocity, float timePerSegmentInSeconds, float maxTravelDistance){	
-	    var positions = new System.Collections.Generic.List<Vector3>();
-		var currentPosition = startPos;
-
-		positions.Add(startPos);
-	
-		var direction = velocity;
-		
-	    //while(traveledDistance < maxTravelDistance){
-		for(var i=0; i< 50; i++){
-	
-	        var newPos = currentPosition + direction + GravityVector(currentPosition) * timePerSegmentInSeconds * 60;
-			//newPos = newPos.normalized;
-			positions.Add(newPos);
-	
-	        currentPosition = newPos;
-			Vector3 acceleration = GravityVector(currentPosition)/this.rigidbody.mass;
-	        direction = direction + (acceleration * timePerSegmentInSeconds);
-	    }
-	    BuildTrajectoryLine(positions);
 	}
 		
 	//Draw Line from set of positions
