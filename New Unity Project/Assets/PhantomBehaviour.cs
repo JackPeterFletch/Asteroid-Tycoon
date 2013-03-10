@@ -16,8 +16,8 @@ public class PhantomBehaviour : MonoBehaviour {
 		LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
         //lineRenderer.useWorldSpace = true;
 		lineRenderer.material = new Material (Shader.Find("Particles/Additive"));
-        lineRenderer.SetColors(Color.white, Color.white);
-		lineRenderer.SetWidth(100,100);
+        lineRenderer.SetColors(Color.blue, Color.blue);
+		lineRenderer.SetWidth(10,10);
 		lineRenderer.SetVertexCount(50);
 	}
 	

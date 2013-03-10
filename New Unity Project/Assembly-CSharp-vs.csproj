@@ -48,6 +48,7 @@
      <Compile Include="Assets\CameraControl.cs" />
      <Compile Include="Assets\PhantomBehaviour.cs" />
      <Compile Include="Assets\RocketBehavior.cs" />
+     <Compile Include="Assets\SpeedWidget.cs" />
      <Compile Include="Assets\asteroidGen.cs" />
      <None Include="Assets\Shaders\Earth.shader" />
   </ItemGroup>
