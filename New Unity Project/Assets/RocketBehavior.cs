@@ -39,7 +39,6 @@ public class RocketBehavior : MonoBehaviour {
 		////////////////
 		
 		var thrust = new Vector3(0,0,-100 * this.rigidbody.mass);
-		
 		var fire = GameObject.Find("Fire");
 		var frontBottom = GameObject.Find("RCSFrontBottom");
 		frontBottom.renderer.enabled = false;
@@ -110,7 +109,7 @@ public class RocketBehavior : MonoBehaviour {
 		//this.UpdateTrajectory(this.transform.position,this.rigidbody.velocity, 1, 4000);
 		
 		if (gyro == true){
-			transform.RotateAround (Vector3.zero, Vector3.back, 20 * Time.deltaTime);
+			
 		}
 		
 		updates++;
@@ -122,12 +121,8 @@ public class RocketBehavior : MonoBehaviour {
 			positions.Add(this.transform.position);
 		}
 		
-		
-		
 		for (var i=0; i<10; i++){
-			
 			phantom.transform.constantForce.relativeForce = zero_thrust;
-		
 			phantom.rigidbody.AddForce(PhantomGravityVector(phantom.transform.position,phantom)*Time.deltaTime*60);
 		}
 	}
@@ -136,18 +131,16 @@ public class RocketBehavior : MonoBehaviour {
         //Instantiate(explosionPrefab, pos, rot) as Transform;
 		if (collision.gameObject == GameObject.Find("Planet")){
         	Destroy(gameObject);
+			Application.Quit();
 		}
-		Application.Quit();
 	}
 	
 	Vector3 GravityVector(Vector3 position){
 		Vector3 origin = new Vector3(0,0,0);
 		var planet = GameObject.Find("Planet");
-		
 		Vector3 diff = origin - position;
 		Vector3 down = diff.normalized;
 		float gravitational_force = (planet.rigidbody.mass * this.rigidbody.mass * gravitational_constant) / diff.sqrMagnitude;
-		
 		return (down * gravitational_force);	
 	}
 	
