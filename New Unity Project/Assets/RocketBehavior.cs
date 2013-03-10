@@ -33,7 +33,7 @@ public class RocketBehavior : MonoBehaviour {
 	void Update () {
 		
 		if (SphereTriggerScript.roidAttached){
-			RCS_thrust = 500000;
+			RCS_thrust = 200000;
 		} else {
 			RCS_thrust = 50000;
 		}
@@ -56,7 +56,6 @@ public class RocketBehavior : MonoBehaviour {
 		var rearTop = GameObject.Find("RCSRearTop");
 		rearTop.renderer.enabled = false;
 		
-		
 		fire.renderer.enabled = false;
 		// Keyboard input
 		if (Input.GetKey(KeyCode.UpArrow)){
@@ -72,6 +71,7 @@ public class RocketBehavior : MonoBehaviour {
 		if (Input.GetKeyUp(KeyCode.UpArrow)){
     	    phantom.transform.position = this.transform.position;
 			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
+			PhantomBehaviour.wipe = true;
      	}
      	if (Input.GetKey(KeyCode.DownArrow)){
 	        this.transform.constantForce.relativeForce = -thrust;
@@ -79,6 +79,7 @@ public class RocketBehavior : MonoBehaviour {
 		if (Input.GetKeyUp(KeyCode.DownArrow)){
     	    phantom.transform.position = this.transform.position;
 			phantom.rigidbody.velocity = this.rigidbody.velocity * 10;
+			PhantomBehaviour.wipe = true;
      	}
 		if (Input.GetKey(KeyCode.W)){
 			//this.transform.Rotate(-2,0,0);
