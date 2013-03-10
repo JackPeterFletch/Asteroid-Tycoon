@@ -164,11 +164,6 @@ public class RocketBehavior : MonoBehaviour {
 	}
 	
 	Vector3 PhantomGravityVector(Vector3 position, GameObject phantom){
-		var mass = phantom.rigidbody.mass;
-		if(SphereTriggerScript.roidAttached){
-			mass = mass + GameObject.Find("SpaceShuttleOrbiter").GetComponent<FixedJoint>().connectedBody.rigidbody.mass;
-		}
-		
 		Vector3 origin = new Vector3(0,0,0);
 		var planet = GameObject.Find("Planet");
 		

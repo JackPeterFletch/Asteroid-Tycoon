@@ -25,14 +25,8 @@ public class AsteroidBehavior : MonoBehaviour {
 		var y = this.transform.position.y;
 		var z_locked = new Vector3(x,y,0);
 		this.transform.position = z_locked;
-			
-		// GRAVITY
-		//Vector3 diff = origin - this.transform.position;
-		//Vector3 down = diff.normalized;
-		//float gravitational_force = (planet.rigidbody.mass * this.rigidbody.mass * gravitational_constant) / diff.sqrMagnitude;
-		//this.rigidbody.AddForce(down * gravitational_force);
+		
 		this.rigidbody.AddForce(GravityVector(this.transform.position)*Time.deltaTime*60);
-		////////////////
 		
 		var zero_thrust = new Vector3(0,0,0);
 		this.transform.constantForce.relativeForce = zero_thrust;
