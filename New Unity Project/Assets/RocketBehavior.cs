@@ -6,11 +6,11 @@ public class RocketBehavior : MonoBehaviour {
 	static float gravitational_constant = 10F;
 	static float updates = 0F;
 	public System.Collections.Generic.List<Vector3> positions = null;
-	
+	public bool gyro = false;
 	
 	// Use this for initialization
 	void Start () {
-		var orbital_velocity = new Vector3(0,1000,0);
+		var orbital_velocity = new Vector3(0,1200,0);
 		this.rigidbody.velocity = orbital_velocity;
 		positions = new System.Collections.Generic.List<Vector3>();
 		
@@ -82,9 +82,16 @@ public class RocketBehavior : MonoBehaviour {
 			//this.transform.Rotate(2,0,0);
 			this.rigidbody.AddTorque(0,0,50000 * this.rigidbody.mass);
 			frontBottom.renderer.enabled = true;
-			rearTop.renderer.enabled = true;
-			
+			rearTop.renderer.enabled = true;	
 		}
+	    if (Input.GetKey (KeyCode.G)){
+			if (gyro == true){
+				gyro = false;
+			}else{
+				gyro = true;
+			}
+		}
+		
 		////////////////////////////////////////
 		
 		// Uncomment these for 3D rotation
@@ -104,6 +111,9 @@ public class RocketBehavior : MonoBehaviour {
 		// Render Orbit prediction
 		//this.UpdateTrajectory(this.transform.position,this.rigidbody.velocity, 1, 4000);
 		
+		if (gyro == true){
+			
+		}
 		
 		updates++;
 		if(updates == 100){

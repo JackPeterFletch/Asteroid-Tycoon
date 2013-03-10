@@ -7,8 +7,14 @@ public class AsteroidBehavior : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		var orbital_velocity = (Vector3.Cross(this.rigidbody.position,Vector3.forward)/15);
+		var x = this.rigidbody.position.x;
+		var y = this.rigidbody.position.y;
+		var distance = Mathf.Sqrt((x*x)+(y*y));
+		var orbital_velocity = (Vector3.Cross(this.rigidbody.position,Vector3.forward)/(distance/850));//The more the distance is divided, the smaller the velocity.
 		this.rigidbody.velocity = orbital_velocity;
+		var rand = Random.Range (-40,80);
+		this.transform.localScale += new Vector3(rand,rand,rand);
+		
 	}
 	
 	// Update is called once per frame
