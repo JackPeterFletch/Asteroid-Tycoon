@@ -55,7 +55,7 @@ public class AsteroidBehavior : MonoBehaviour {
         //Instantiate(explosionPrefab, pos, rot) as Transform;
 		if (collision.gameObject == GameObject.Find("Planet")){
 			GameObject.Find("Main Camera").audio.Play();
-			MoneyCounterScript.money = MoneyCounterScript.money + (int)transform.localScale.x /150 *1000;
+			MoneyCounterScript.money = MoneyCounterScript.money + (int)((transform.localScale.x *1000)/150);
         	Destroy(gameObject);
 		}
 	}
