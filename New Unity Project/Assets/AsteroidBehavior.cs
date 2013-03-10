@@ -44,5 +44,13 @@ public class AsteroidBehavior : MonoBehaviour {
 		
 		return (down * gravitational_force);	
 	}
+	
+	void OnCollisionEnter(Collision collision) {
+		
+        //Instantiate(explosionPrefab, pos, rot) as Transform;
+		if (collision.gameObject == GameObject.Find("Planet")){
+        	Destroy(gameObject);
+		}
+	}
 		
 }
