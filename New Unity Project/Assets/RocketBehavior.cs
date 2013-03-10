@@ -84,14 +84,22 @@ public class RocketBehavior : MonoBehaviour {
      	}
 		if (Input.GetKey(KeyCode.W)){
 			if(!gyro){
-				this.rigidbody.AddTorque(0,0,-RCS_thrust * this.rigidbody.mass);
+				if(SphereTriggerScript.roidAttached){
+					this.GetComponent<FixedJoint>().rigidbody.AddTorque(0,0,-RCS_thrust * this.rigidbody.mass);
+				} else{
+					this.rigidbody.AddTorque(0,0,-RCS_thrust * this.rigidbody.mass);
+				}
 				frontTop.renderer.enabled = true;
 				rearBottom.renderer.enabled = true;
 			}
 		}
 		if (Input.GetKey(KeyCode.S)){
 			if(!gyro){
-				this.rigidbody.AddTorque(0,0,RCS_thrust * this.rigidbody.mass);
+				if(SphereTriggerScript.roidAttached){
+					this.GetComponent<FixedJoint>().rigidbody.AddTorque(0,0,RCS_thrust * this.rigidbody.mass);
+				} else{
+					this.rigidbody.AddTorque(0,0,RCS_thrust * this.rigidbody.mass);
+				}
 				frontBottom.renderer.enabled = true;
 				rearTop.renderer.enabled = true;
 			}
