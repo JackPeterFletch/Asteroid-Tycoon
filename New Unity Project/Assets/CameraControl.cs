@@ -17,6 +17,9 @@ public class CameraControl : MonoBehaviour {
 		Vector3 planet_pos = GameObject.Find("Planet").transform.position;
 		var planet_radius = 4500/2;
 		var zoom = (Vector3.Distance(planet_pos, rocket_pos) - planet_radius) + 600 + manual_zoom;
+		if(zoom < 600){
+			zoom = 600;
+		}
 		GameObject.Find("Main Camera").transform.position = new Vector3(rocket_pos.x, rocket_pos.y, -zoom);
 		
 		if (Input.GetKey(KeyCode.Z)){
@@ -24,6 +27,9 @@ public class CameraControl : MonoBehaviour {
 		}
 		if (Input.GetKey(KeyCode.X)){
 			manual_zoom -= 50;
+		}
+		if(manual_zoom < -4000){
+			manual_zoom = -4000;
 		}
 	}
 }
