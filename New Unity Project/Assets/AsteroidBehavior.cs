@@ -13,8 +13,10 @@ public class AsteroidBehavior : MonoBehaviour {
 		var distance = Mathf.Sqrt((x*x)+(y*y));
 		var orbital_velocity = (Vector3.Cross(this.rigidbody.position,Vector3.forward)/(distance/780));//The more the distance is divided, the smaller the velocity.
 		this.rigidbody.velocity = orbital_velocity;
-		rand  = Random.Range (-40,120);
+		rand  = Random.Range (-50,150);
 		this.transform.localScale += new Vector3(rand,rand,rand);
+		var mass = this.rigidbody.mass * (transform.localScale.x/150);
+		this.rigidbody.mass = mass;
 	}
 	
 	// Update is called once per frame
@@ -56,6 +58,7 @@ public class AsteroidBehavior : MonoBehaviour {
 		if (collision.gameObject == GameObject.Find("Planet")){
 			GameObject.Find("Main Camera").audio.Play();
 			MoneyCounterScript.money = MoneyCounterScript.money + (int)((transform.localScale.x *1000)/150);
+			MoneyCounterScript.deorbit_count++;
         	Destroy(gameObject);
 		}
 	}
