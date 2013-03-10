@@ -9,6 +9,7 @@ public class RocketBehavior : MonoBehaviour {
 	public GameObject phantom;
 	public bool gyro = true;
 	public bool first_tick = true;
+	public float RCS_thrust;
 	
 	// Use this for initialization
 	void Start () {
@@ -30,6 +31,12 @@ public class RocketBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		if (SphereTriggerScript.roidAttached){
+			RCS_thrust = 500000;
+		} else {
+			RCS_thrust = 50000;
+		}
 		
 		var zero_thrust = new Vector3(0,0,0);
 		this.transform.constantForce.relativeForce = zero_thrust;
@@ -71,13 +78,13 @@ public class RocketBehavior : MonoBehaviour {
      	}
 		if (Input.GetKey(KeyCode.W)){
 			//this.transform.Rotate(-2,0,0);
-			this.rigidbody.AddTorque(0,0,-50000 * this.rigidbody.mass);
+			this.rigidbody.AddTorque(0,0,-RCS_thrust * this.rigidbody.mass);
 			frontTop.renderer.enabled = true;
 			rearBottom.renderer.enabled = true;
 		}
 		if (Input.GetKey(KeyCode.S)){
 			//this.transform.Rotate(2,0,0);
-			this.rigidbody.AddTorque(0,0,50000 * this.rigidbody.mass);
+			this.rigidbody.AddTorque(0,0,RCS_thrust * this.rigidbody.mass);
 			frontBottom.renderer.enabled = true;
 			rearTop.renderer.enabled = true;	
 		}

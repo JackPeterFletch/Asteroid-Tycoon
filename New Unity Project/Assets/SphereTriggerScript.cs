@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SphereTriggerScript : MonoBehaviour {
 	
-	static bool roidAttached;
+	public static bool roidAttached;
 
 	public static bool toolDetaching;
 	
