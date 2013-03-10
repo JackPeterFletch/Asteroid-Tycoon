@@ -7,7 +7,7 @@ public class RocketBehavior : MonoBehaviour {
 	static float updates = 0F;
 	public System.Collections.Generic.List<Vector3> positions = null;
 	public GameObject phantom;
-	public bool gyro = false;
+	public bool gyro = true;
 	public bool first_tick = true;
 	
 	// Use this for initialization
@@ -109,7 +109,12 @@ public class RocketBehavior : MonoBehaviour {
 		//this.UpdateTrajectory(this.transform.position,this.rigidbody.velocity, 1, 4000);
 		
 		if (gyro == true){
-			
+			transform.LookAt(Vector3.zero);
+			if (this.rigidbody.position.x <=0){
+				transform.Rotate(new Vector3(90,0,180));
+			}else{
+				transform.Rotate(new Vector3(270,0,0));
+			}
 		}
 		
 		updates++;

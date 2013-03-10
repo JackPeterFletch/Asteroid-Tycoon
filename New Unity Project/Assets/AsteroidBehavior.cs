@@ -14,7 +14,6 @@ public class AsteroidBehavior : MonoBehaviour {
 		this.rigidbody.velocity = orbital_velocity;
 		var rand = Random.Range (-40,120);
 		this.transform.localScale += new Vector3(rand,rand,rand);
-		
 	}
 	
 	// Update is called once per frame
