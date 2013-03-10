@@ -7,6 +7,8 @@ public class SphereTriggerScript : MonoBehaviour {
 
 	public static bool toolDetaching;
 	
+	public AudioClip thunkNoise;
+	
 	// Use this for initialization
 	void Start () {
 		roidAttached = false;
@@ -23,6 +25,7 @@ public class SphereTriggerScript : MonoBehaviour {
 			
 			var shuttleVar = GameObject.Find("SpaceShuttleOrbiter");
 			Destroy(shuttleVar.GetComponent<FixedJoint>());
+			
 						
 		} else if(Input.GetKeyDown(KeyCode.Space)){
 			toolDetaching = !toolDetaching;
@@ -36,7 +39,7 @@ public class SphereTriggerScript : MonoBehaviour {
 		
 		if(other.name == "asteroid 3DS(Clone)" && !roidAttached && !toolDetaching){
 			
-			
+			GameObject.Find ("Main Camera").audio.PlayOneShot(thunkNoise);
 			var shuttleVar = GameObject.Find("SpaceShuttleOrbiter");
 			
 			shuttleVar.AddComponent("FixedJoint");

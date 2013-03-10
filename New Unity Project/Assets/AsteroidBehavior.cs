@@ -55,6 +55,7 @@ public class AsteroidBehavior : MonoBehaviour {
 			MoneyCounterScript.deorbit_count++;
         	Destroy(gameObject);
 		}
+
 	}
 		
 }
