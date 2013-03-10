@@ -4,8 +4,8 @@ using System.Collections;
 public class MenuScript : MonoBehaviour {
 
 	void OnGUI () {
-        GUI.TextArea(new Rect((Screen.width - 220),(Screen.height - 650),80,20),"CONTROLS");
-        GUI.TextArea(new Rect((Screen.width - 260),(Screen.height - 620),160,230),
+        GUI.TextArea(new Rect((Screen.width - 220),(Screen.height - 680),80,20),"CONTROLS");
+        GUI.TextArea(new Rect((Screen.width - 260),(Screen.height - 650),160,230),
 			"Up: Increase Thrust" + System.Environment.NewLine +
 			System.Environment.NewLine +
 			"Down: Decrease Thrust" + System.Environment.NewLine +
