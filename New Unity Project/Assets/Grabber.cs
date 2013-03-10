@@ -11,8 +11,10 @@ public class Grabber: MonoBehaviour {
 	void Update () {				
 		if (SphereTriggerScript.toolDetaching == true){
 			this.guiText.text = "Grabber: Off";
+			GameObject.Find("Magnet").renderer.enabled = false;
 		} else {
 			this.guiText.text = "Grabber: On";
+			GameObject.Find("Magnet").renderer.enabled = true;
 		}
 	}
 }

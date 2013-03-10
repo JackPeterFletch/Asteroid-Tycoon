@@ -19,11 +19,11 @@ public class CameraControl : MonoBehaviour {
 		var zoom = (Vector3.Distance(planet_pos, rocket_pos) - planet_radius) + 8000;
 		
 		var current_manual_zoom = manual_zoom;
-		if (Input.GetKey(KeyCode.Z)){
-			manual_zoom += 100;
-		}
 		if (Input.GetKey(KeyCode.X)){
-			manual_zoom -= 100;
+			manual_zoom += 200;
+		}
+		if (Input.GetKey(KeyCode.Z)){
+			manual_zoom -= 200;
 		}
 		if((zoom + manual_zoom) < 600){
 			manual_zoom = current_manual_zoom;
