@@ -5,12 +5,10 @@ public class SphereTriggerScript : MonoBehaviour {
 	
 	public static bool roidAttached;
 
-	public static bool toolDetaching;
 	
 	// Use this for initialization
 	void Start () {
 		roidAttached = false;
-		toolDetaching = false;
 	}
 	
 	// Update is called once per frame
@@ -18,14 +16,11 @@ public class SphereTriggerScript : MonoBehaviour {
 		
 		if (Input.GetKeyDown(KeyCode.Space) && roidAttached){
 			
-			toolDetaching = true;
 			roidAttached = false;
 			
 			var shuttleVar = GameObject.Find("SpaceShuttleOrbiter");
 			Destroy(shuttleVar.GetComponent<FixedJoint>());
 						
-		} else if(Input.GetKeyDown(KeyCode.Space)){
-			toolDetaching = !toolDetaching;
 		}
 	
 	}
@@ -34,10 +29,12 @@ public class SphereTriggerScript : MonoBehaviour {
 		
 		Debug.Log(other.name);
 		
-		if(other.name == "asteroid 3DS(Clone)" && !roidAttached && !toolDetaching){
+		if(other.name == "asteroid 3DS(Clone)" && !roidAttached){
 			
 			
 			var shuttleVar = GameObject.Find("SpaceShuttleOrbiter");
+			
+			RocketBehavior.gyro = false;
 			
 			shuttleVar.AddComponent("FixedJoint");
 			shuttleVar.GetComponent<FixedJoint>().connectedBody = other.rigidbody;
