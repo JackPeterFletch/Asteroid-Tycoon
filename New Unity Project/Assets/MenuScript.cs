@@ -23,11 +23,11 @@ public class MenuScript : MonoBehaviour {
 			"Spacebar: Grabber On/Off" + System.Environment.NewLine);
 
 	// We'll make a box so you can see where the group is on-screen.
-		GUI.Box (new Rect ((Screen.width / 2),(Screen.height - 750),100,100), "Menu");
-		if (GUI.Button (new Rect (((Screen.width / 2) + 10),(Screen.height - 725),80,30), "Start Game")){
+		GUI.Box (new Rect (((Screen.width / 2)-40),(Screen.height - 750),100,100), "Menu");
+		if (GUI.Button (new Rect (((Screen.width / 2) - 30),(Screen.height - 725),80,30), "Start Game")){
 			Application.LoadLevel("mainScene");		
 		}
-		if (GUI.Button (new Rect (((Screen.width / 2) + 10),(Screen.height - 685),80,30), "Quit")){
+		if (GUI.Button (new Rect (((Screen.width / 2) - 30),(Screen.height - 685),80,30), "Quit")){
 			Application.Quit();
 		}
 	}
